@@ -6,6 +6,8 @@ import StrayCare.prototype.service.DogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DogServiceImpl implements DogService {
 
@@ -20,5 +22,10 @@ public class DogServiceImpl implements DogService {
         }catch (Exception e){
             return false;
         }
+    }
+
+    @Override
+    public List<Dog> getAllDogs() {
+        return dogRepo.findAll();
     }
 }
