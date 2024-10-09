@@ -3,10 +3,12 @@ package StrayCare.prototype.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class Dog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

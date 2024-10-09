@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/dog")
-@CrossOrigin(origins = "http://localhost:3000")
 public class DogController {
 
     @Autowired
@@ -32,7 +31,7 @@ public class DogController {
         }
     }
 
-    @GetMapping("/all")
+    @PostMapping("/all")
     public ResponseEntity<List<Dog>> getAllDogs(){
         return new ResponseEntity<>(dogService.getAllDogs(), HttpStatus.OK);
     }
