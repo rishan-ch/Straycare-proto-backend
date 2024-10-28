@@ -1,6 +1,7 @@
 package StrayCare.prototype.controller;
 
 import StrayCare.prototype.DTO.LoginCred;
+import StrayCare.prototype.configuration.SecurityConfiguration;
 import StrayCare.prototype.model.User;
 import StrayCare.prototype.service.implementation.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,11 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
+    private SecurityConfiguration secConfig;
+
     @PostMapping("/add")
     public ResponseEntity<String> adduser(@RequestBody User user){
+       
         if(userService.addUser(user)){
             return new ResponseEntity<>("User added", HttpStatus.OK);
         } else{
@@ -31,6 +35,12 @@ public class UserController {
             return new ResponseEntity<>("Valid credentials", HttpStatus.OK);
         }
         return new ResponseEntity<>("Invalid credentials", HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/info/{id}")
+    public ResponseEntity<User> getByUserId(@PathVariable int id){
+
+        return new ResponseEntity<>(userService.getByUserId(id),HttpStatus.OK);
     }
 
 }

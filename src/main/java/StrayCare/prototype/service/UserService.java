@@ -9,4 +9,5 @@ public interface UserService {
     boolean findUser(String email, String password);
     void updateUser(User user);
     void deleteUser(User user);
+    User getByUserId(int id);
 }

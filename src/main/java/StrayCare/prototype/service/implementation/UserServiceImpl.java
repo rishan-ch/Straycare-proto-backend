@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService{
     public void deleteUser(User user) {
 
     }
+
+    @Override
+    public User getByUserId(int id) {
+        return userRepo.findByUserId(id);
+    }
 }

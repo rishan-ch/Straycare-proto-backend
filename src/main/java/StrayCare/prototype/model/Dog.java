@@ -12,11 +12,15 @@ import lombok.NoArgsConstructor;
 public class Dog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int dog_id;
+    private int dogId;
     private String name;
     private String breed;
     @Lob
     private byte[] photo;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Dog(String name, String breed, byte[] photo) {
         this.name = name;
