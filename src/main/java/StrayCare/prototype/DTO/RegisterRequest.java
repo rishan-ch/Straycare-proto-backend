@@ -9,8 +9,8 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class LoginRes {
-    private String jwtToken;
+public class RegisterRequest {
+    private String name;
     private String email;
-    private String role;
+    private String password;
 }

@@ -4,6 +4,8 @@ import StrayCare.prototype.model.User;
 import StrayCare.prototype.repository.UserRepository;
 import StrayCare.prototype.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,11 +26,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean findUser(String email, String password) {
         User user = userRepo.findByEmailAndPassword(email, password);
-        if(user!=null){
-            return true;
-        }else {
-            return false;
-        }
+        return user != null;
     }
 
     @Override
@@ -46,8 +44,9 @@ public class UserServiceImpl implements UserService{
         return userRepo.findByUserId(id);
     }
 
+
     @Override
-    public User getByEmail(String email) {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepo.findByEmail(email);
     }
 }
