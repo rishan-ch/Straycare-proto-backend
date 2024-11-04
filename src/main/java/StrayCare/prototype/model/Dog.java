@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
@@ -19,12 +20,13 @@ public class Dog {
     private byte[] photo;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public Dog(String name, String breed, byte[] photo) {
+    public Dog(String name, String breed, byte[] photo, User user) {
         this.name = name;
         this.breed = breed;
         this.photo = photo;
+        this.user = user;
     }
 }

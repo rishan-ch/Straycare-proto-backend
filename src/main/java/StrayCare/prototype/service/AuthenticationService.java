@@ -4,11 +4,13 @@ import StrayCare.prototype.DTO.LoginCred;
 import StrayCare.prototype.DTO.LoginRes;
 import StrayCare.prototype.DTO.RegisterRequest;
 import StrayCare.prototype.configuration.JwtService;
+import StrayCare.prototype.model.Role;
 import StrayCare.prototype.model.User;
 import StrayCare.prototype.service.implementation.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,13 +19,14 @@ public class AuthenticationService {
     private final UserServiceImpl userService;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     public LoginRes register(RegisterRequest request){
         User user = new User();
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
-
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(Role.USER);
         boolean added = userService.addUser(user);
         String token = jwtService.generateToken(user);
 
